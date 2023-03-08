@@ -18,24 +18,26 @@ class Concesionaria {
             Console.WriteLine("No hay mas espacio en la Concesionaria");
         }
     }
-    public void MostrarAuto(Automovil auto){
-      if(auto != null){
-
-        foreach(Automovil item in Autos){
-
-          if(item == auto){
-
-            Console.WriteLine(item);
-            return; 
-          }
-        }
+    public void MostrarAuto(Automovil auto) {
+        if(auto != null) {
+            foreach(Automovil item in Autos) {
+                if(item == auto){
+                    Console.WriteLine(item);
+                    return; 
+                }
+            }
         Console.WriteLine("El auto que buscas no está en la Concesionario");
-      }
+        }
     }
     public void EliminarAuto(Automovil auto) {
-        if(actual == 0){
-            Autos.Remove(auto);
-            actual -= 1;
+        if(actual != 0){
+            foreach(Automovil item in Autos){
+                if(item == auto){
+                    Autos.Remove(item);
+                    actual -= 1;
+                    return; 
+                }
+            }
         }else{
             Console.WriteLine("No hay autos que eliminar de la Concesionaria");
         }
@@ -45,9 +47,8 @@ class Concesionaria {
             Console.WriteLine(item);
         }
     }
-     public void VaciarConcesionario(Automovil auto) {
-        
-            Autos.Clear();
-            Console.WriteLine("La Concesionaria está vacia");
+    public void VaciarConcesionario(Automovil auto) {
+        Autos.Clear();
+        Console.WriteLine("La Concesionaria está vacia");
     }
 }
