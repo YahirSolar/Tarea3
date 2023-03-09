@@ -11,33 +11,35 @@ class Concesionaria {
         this.actual = 0;
     }
     public void AgregarAuto(Automovil auto) {
-        if(actual < limite){
-            Autos.Add(auto);
-            actual += 1;
+        if(auto != null && actual < limite){
+            Automovil? autoEncontrado = Autos.Find((autoL) => autoL.placa == auto.placa);
+            if(autoEncontrado != null){
+                Autos.Add(auto);
+                actual += 1;
+            }else{
+                Console.WriteLine("\nNo ingresaste un auto\n");
+            }   
         }else{
             Console.WriteLine("\nNo hay mas espacio en la Concesionaria\n");
         }
     }
-    public void MostrarAuto(Automovil auto) {
-        if(auto != null) {
-            foreach(Automovil item in Autos) {
-                if(item == auto) {
-                    Console.WriteLine(item);
-                    return; 
-                }
-            }
-        Console.WriteLine("\nEl auto que buscas no está en el Concesionario\n");
+    public void MostrarAuto(string placa) {
+
+        Automovil? autoEncontrado = Autos.Find((autoL) => autoL.placa == placa);
+        if(autoEncontrado != null) {
+            Console.WriteLine(autoEncontrado.ToString());
+        }else{
+            Console.WriteLine("\nEl auto que buscas no está en el Concesionario\n"); 
         }
+        
     }
-    public void EliminarAuto(Automovil auto) {
-        if(actual != 0){
-            foreach(Automovil item in Autos){
-                if(item == auto) {
-                    Autos.Remove(item);
-                    actual -= 1;
-                    return; 
-                }
-            }
+    public void EliminarAuto(string placa) {
+        if(placa != "" && actual != 0){
+            Automovil? autoEncontrado = Autos.Find((autoL) => autoL.placa == placa);
+            if(autoEncontrado != null){
+                Autos.Remove(autoEncontrado);
+                actual -= 1;
+            }    
         }else{
             Console.WriteLine("\nNo hay autos que eliminar de la Concesionaria\n");
         }
@@ -48,7 +50,7 @@ class Concesionaria {
             Console.WriteLine(item);
         }
     }
-    public void VaciarConcesionario(Automovil auto) {
+    public void VaciarConcesionario() {
         Autos.Clear();
         Console.WriteLine("\nLa Concesionaria está vacia se los robo el samu pelon\n");
     }
