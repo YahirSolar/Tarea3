@@ -11,47 +11,50 @@ class Concesionaria {
         this.actual = 0;
     }
     public void AgregarAuto(Automovil auto) {
-        if(auto != null && actual < limite){
+        if(auto != null && actual < limite) {
             Automovil? autoEncontrado = Autos.Find((autoL) => autoL.placa == auto.placa);
-            if(autoEncontrado != null){
+            if(autoEncontrado == null) {
                 Autos.Add(auto);
                 actual += 1;
-            }else{
-                Console.WriteLine("\nNo ingresaste un auto\n");
-            }   
-        }else{
-            Console.WriteLine("\nNo hay mas espacio en la Concesionaria\n");
+                Console.WriteLine("Automovil agregado exitosamente");
+            }else {
+                Console.WriteLine("No se agrego el automovil");
+            }
+        }else {
+            Console.WriteLine("No hay mas espacio en la Concesionaria");
         }
     }
-    public void MostrarAuto(string placa) {
+    public void MostrarAuto(string? placa) {
 
         Automovil? autoEncontrado = Autos.Find((autoL) => autoL.placa == placa);
         if(autoEncontrado != null) {
+            Console.WriteLine("El Auto es:");
             Console.WriteLine(autoEncontrado.ToString());
-        }else{
-            Console.WriteLine("\nEl auto que buscas no está en el Concesionario\n"); 
+        }else {
+            Console.WriteLine("El automovil no se encontro");
         }
-        
     }
-    public void EliminarAuto(string placa) {
-        if(placa != "" && actual != 0){
+    public void EliminarAuto(string? placa) {
+        if(placa != "" && actual != 0) {
             Automovil? autoEncontrado = Autos.Find((autoL) => autoL.placa == placa);
-            if(autoEncontrado != null){
+            if(autoEncontrado != null) {
                 Autos.Remove(autoEncontrado);
                 actual -= 1;
-            }    
-        }else{
-            Console.WriteLine("\nNo hay autos que eliminar de la Concesionaria\n");
+                Console.WriteLine("Automovil eliminado exitosamente");
+            }else {
+                Console.WriteLine("No se elimino el automovil");
+            }  
+        }else {
+            Console.WriteLine("No hay autos que eliminar de la Concesionaria");
         }
     }
     public void MostrarAutos() {
-        Console.WriteLine("\nAutos de la Concecionaria SamuPelonSA\n");
-        foreach(Automovil item in Autos){
-            Console.WriteLine(item);
+        foreach(Automovil item in Autos) {
+            Console.WriteLine(" Automovil:\n" + item);
         }
     }
     public void VaciarConcesionario() {
         Autos.Clear();
-        Console.WriteLine("\nLa Concesionaria está vacia se los robo el samu pelon\n");
+        Console.WriteLine("La Concesionaria está vacia el samu pelon se los robo");
     }
 }
